@@ -41,28 +41,16 @@ public class ApiPackageService {
     @Autowired
     private ApiPackageInterfacesRepository apiPackageInterfacesRepository;
     
-    @Autowired
-    @Qualifier("androidFetchServiceImpl")
-    private FetchService androidFetchServiceImpl;
     
     public int reIndex(final FrameWork framework) throws Exception {
         
         this.apiPackageRepository.deleteAllByFrameWork(framework.name());
         
         LOG.info("updating indexes");
-        final List<ApiPackage> apiPackageList =  androidFetchServiceImpl.getApiPackages();
+        final List<ApiPackage> apiPackageList =  FetchServiceFactory.getFetchService(framework).getApiPackages();
         
         return this.apiPackageRepository.saveAll(apiPackageList).size();
         
-        
-//        for(int i = 0; i < apiPackageList.size(); i++) {
-//            final ApiPackage savedApiPackage = this.upserApiPackage(apiPackageList.get(i));
-//            LOG.info(savedApiPackage);
-//            LOG.info("2 " + apiPackageList.get(i));
-//           if (apiPackageList.get(i).getInterfacesList() != null)this.upsertApiPackageInterfaces(apiPackageList.get(i), savedApiPackage);
-//           if (apiPackageList.get(i).getClassesList() != null)this.upsertApiPackageClasses(apiPackageList.get(i), savedApiPackage);
-//        }
-//        
     }
 
     public int reIndexDescription(final FrameWork frameWork) throws Exception {
@@ -74,11 +62,11 @@ public class ApiPackageService {
         for(ApiPackage apiPackage : apiPackageList ) {
             List<ApiPackageInterfaces> apiPackageInterfacesList = apiPackage.getInterfacesList();
             for(ApiPackageInterfaces apiPackageInterfaces : apiPackageInterfacesList) {
-                apiPackageInterfaces.setDescription(androidFetchServiceImpl.getDescriptions(apiPackageInterfaces.getReference()));
+                apiPackageInterfaces.setDescription(FetchServiceFactory.getFetchService(frameWork).getDescriptions(apiPackageInterfaces.getReference()));
             }
             List<ApiPackageClasses> apiPackageClassesList = apiPackage.getClassesList();
             for(ApiPackageClasses apiPackageClasses : apiPackageClassesList) {
-                apiPackageClasses.setDescription(androidFetchServiceImpl.getDescriptions(apiPackageClasses.getReference()));
+                apiPackageClasses.setDescription(FetchServiceFactory.getFetchService(frameWork).getDescriptions(apiPackageClasses.getReference()));
             }
         }
         
