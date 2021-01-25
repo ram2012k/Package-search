@@ -140,21 +140,18 @@ public class ApiPackageService {
         frameWorksList = Stream.of(FrameWork.values())
                 .map(Enum::name)
                 .collect(Collectors.toList());
-        LOG.info(frameWorksList);
         
-        if (pageRequest.getFrameWorks() != null && pageRequest.getFrameWorks().size() >= 0) {
+        if (pageRequest.getFrameWorks() != null && pageRequest.getFrameWorks().size() > 0) {
             frameWorksList = new ArrayList<>();
             for(int i = 0; i < pageRequest.getFrameWorks().size(); i++) {
              frameWorksList.add(pageRequest.getFrameWorks().get(i).name());   
             }
         } 
         LOG.info(pageRequest.getFrameWorks());
-        LOG.info(pageRequest.getQuery() + pageRequest.getQuery().length() + " " + frameWorksList);
-        if (pageRequest.getApiLevel() != -1) {
+        LOG.info(pageRequest.getQuery() + pageRequest.getQuery().length() + " " + frameWorksList);if (pageRequest.getApiLevel() != -1) {
             return this.apiPackageRepository.searchAPIsWithVersionAdded(pageRequest.getQuery(),
                     frameWorksList, pageRequest.getApiLevel(), pageable);
         }
-        LOG.info(pageRequest.getFrameWorks());
         final Page<ApiPackage> page = this.apiPackageRepository.searchAPIs(pageRequest.getQuery(), 
                 frameWorksList, pageable);
         return page;
