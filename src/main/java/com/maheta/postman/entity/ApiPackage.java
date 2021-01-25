@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.apache.log4j.Logger;
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -112,5 +114,20 @@ public class ApiPackage {
 
     public void setFrameWork(final String frameWork) {
         this.frameWork = frameWork;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.hashCode();
+    }
+
+    public static Logger LOG = Logger.getLogger(ApiPackage.class);
+    @Override
+    public boolean equals(final Object obj) {
+        if(obj instanceof ApiPackage){
+            ApiPackage toCompare = (ApiPackage) obj;
+            return this.packageName.equals(toCompare.packageName);
+        }
+        return false;
     }
 }

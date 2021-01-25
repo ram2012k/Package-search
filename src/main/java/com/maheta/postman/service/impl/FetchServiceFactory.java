@@ -19,6 +19,10 @@ public class FetchServiceFactory {
     @Qualifier("androidFetchServiceImpl")
     private FetchService androidFetchServiceImpl;
 
+    @Autowired
+    @Qualifier("tomcatFetchServiceImpl")
+    private FetchService tomcatFetchServiceImpl;
+
     /**
      * Autowired other {@link FetchService} implements here
      */
@@ -31,6 +35,7 @@ public class FetchServiceFactory {
          * Add {@link FrameWork} - {@link FetchService}  implementation in fetchServiceMap
          */
         fetchServiceMap.put(FrameWork.ANDROID, androidFetchServiceImpl);
+        fetchServiceMap.put(FrameWork.TOMCAT, tomcatFetchServiceImpl);
     }
     
     public static FetchService getFetchService(final  FrameWork frameWork) {

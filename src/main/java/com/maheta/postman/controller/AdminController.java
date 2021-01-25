@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.maheta.postman.FrameWork;
 import com.maheta.postman.service.impl.ApiPackageService;
 
-/**
- * TODO: Document this class.
- */
+
 @RestController
 @RequestMapping("/app/admin")
 public class AdminController {

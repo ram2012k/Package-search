@@ -30,7 +30,7 @@ public class PageRequest {
     protected SortOrder sortOrder;
 
     @Size(max = 2000)
-    protected String query;
+    protected String query = "";
     
     protected List<FrameWork> frameWorks;
     

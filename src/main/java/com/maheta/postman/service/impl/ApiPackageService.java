@@ -137,10 +137,12 @@ public class ApiPackageService {
             }
         } 
         LOG.info(pageRequest.getFrameWorks());
+        LOG.info(pageRequest.getQuery() + pageRequest.getQuery().length());
         if (pageRequest.getApiLevel() != -1) {
             return this.apiPackageRepository.searchAPIsWithVersionAdded(pageRequest.getQuery(),
                     frameWorksList,pageRequest.getApiLevel(), pageable);
         }
+        LOG.info(pageRequest.getFrameWorks());
         final Page<ApiPackage> page = this.apiPackageRepository.searchAPIs(pageRequest.getQuery(), 
                 frameWorksList, pageable);
         return page;

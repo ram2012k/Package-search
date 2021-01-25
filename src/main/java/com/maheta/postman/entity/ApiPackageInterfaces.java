@@ -100,4 +100,17 @@ public class ApiPackageInterfaces {
     public void setApiPackage(final ApiPackage apiPackage) {
         this.apiPackage = apiPackage;
     }
+    @Override
+    public int hashCode() {
+        return this.hashCode();
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if(obj instanceof ApiPackageInterfaces){
+            ApiPackageInterfaces toCompare = (ApiPackageInterfaces) obj;
+            return this.name.equals(toCompare.name);
+        }
+        return false;
+    }
 }
