@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import javax.transaction.Transactional;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.maheta.postman.FrameWork;
@@ -40,7 +44,13 @@ public class ApiPackageService {
     
     @Autowired
     private ApiPackageInterfacesRepository apiPackageInterfacesRepository;
-    
+
+
+    @Async
+    public CompletableFuture<Integer> reIndexDB(final FrameWork framework) throws Exception {
+        return CompletableFuture.completedFuture(reIndex(framework));
+        
+    }
     
     public int reIndex(final FrameWork framework) throws Exception {
         

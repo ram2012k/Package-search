@@ -18,8 +18,9 @@ public class AdminController {
     public ApiPackageService apiPackageService;
 
     @RequestMapping(method = RequestMethod.PUT, value = "/reindex/{framework}")//, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    private int reindex(@PathVariable("framework") final FrameWork frameWork) throws Exception {
-        return apiPackageService.reIndex(frameWork);
+    private String reindex(@PathVariable("framework") final FrameWork frameWork) throws Exception {
+        apiPackageService.reIndexDB(frameWork);
+        return "Re-Indexing started. It will take 1-2 minutes";
     }
 
     @RequestMapping(method = RequestMethod.PATCH, value = "/reindex/{framework}/description")//, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

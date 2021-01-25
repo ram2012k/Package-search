@@ -51,7 +51,7 @@ public class TomcatFetchServiceImpl implements FetchService {
                 .userAgent("PostmanRuntime/7.20.1")
                 .referrer("www.google.com")
                 .maxBodySize(0)
-                .timeout(10000)
+                .timeout(20000)
                 .get();
 
     }
@@ -95,7 +95,7 @@ public class TomcatFetchServiceImpl implements FetchService {
             
             final MessageFormat descriptionURLFormat = new MessageFormat(INDEX_ALL);
             final Document description = getDocument(descriptionURLFormat.format(new String[]{location}));
-            
+            LOG.info("Document downloaded");
             setDescription(description, apiPackageList);
 
         }
