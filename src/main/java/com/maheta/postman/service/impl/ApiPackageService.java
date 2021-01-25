@@ -140,6 +140,7 @@ public class ApiPackageService {
         frameWorksList = Stream.of(FrameWork.values())
                 .map(Enum::name)
                 .collect(Collectors.toList());
+        LOG.info(frameWorksList);
         
         if (pageRequest.getFrameWorks() != null && pageRequest.getFrameWorks().size() >= 0) {
             frameWorksList = new ArrayList<>();
